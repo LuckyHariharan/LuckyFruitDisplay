@@ -55,7 +55,6 @@ export const Jar = () => {
     >
       <h2 className="font-bold text-lg mb-4">Your Jar</h2>
 
-      {/* Buttons at the top */}
       <div className="flex justify-between mb-4">
         <button
           onClick={toggleBreakdown}
@@ -77,7 +76,6 @@ export const Jar = () => {
         </button>
       </div>
 
-      {/* Collapsible Fruit List */}
       {!isListCollapsed && (
         <ul>
           {state.selectedFruits.map((item, index) => (
@@ -101,7 +99,6 @@ export const Jar = () => {
 
       <div className="mt-4 font-bold">Total Calories: {totals.calories}</div>
 
-      {/* Nutrition Breakdown */}
       {showBreakdown && (
         <motion.div
           className="mt-4 p-4 border border-gray-300 rounded bg-gray-700 text-white"

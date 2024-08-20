@@ -21,15 +21,15 @@ const App = () => {
             </p>
           </motion.header>
           <motion.main
-            className="flex w-full max-w-5xl"
+            className="flex flex-col-reverse place-items-start  lg:flex-row w-full max-w-5xl  md:mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <div className="w-1/2 pr-4">
+            <div className="md:w-1/2 pr-4">
               <FruitList />
             </div>
-            <div className="w-1/2 pl-4">
+            <div className="md:w-1/2 w-full md:pl-4">
               <Jar />
             </div>
           </motion.main>
