@@ -77,20 +77,26 @@ export const FruitList = () => {
           transition={{ duration: 0.3 }}
         >
           <div className="flex py-4 justify-between items-center">
-            <div className="flex items-center cursor-pointer">
-              <h3 className="font-bold text-lg">{group}</h3>
-              <FontAwesomeIcon
-                icon={collapsedGroups[group] ? faChevronDown : faChevronUp}
-                className="text-white ml-2"
-                onClick={() => toggleGroupCollapse(group)}
-              />
+            <div onClick={() => toggleGroupCollapse(group)}>
+              <div className="flex items-center cursor-pointer">
+                <h3 className="font-bold text-lg">{group}</h3>
+                <FontAwesomeIcon
+                  icon={collapsedGroups[group] ? faChevronDown : faChevronUp}
+                  className="text-white ml-2"
+                />
+              </div>{" "}
             </div>
-            <button
-              onClick={() => handleAddGroup(fruits)}
-              className="bg-primaryButton hover:bg-buttonHover text-white px-4 py-1 rounded"
+            <motion.li
+              className="flex justify-between mb-2"
+              whileHover={{ scale: 1.05 }}
             >
-              Add All
-            </button>
+              <button
+                onClick={() => handleAddGroup(fruits)}
+                className="ml-4 bg-primaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
+              >
+                Add All
+              </button>
+            </motion.li>
           </div>
           {!collapsedGroups[group] && (
             <ul>

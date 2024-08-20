@@ -4,23 +4,26 @@ import { motion } from "framer-motion";
 
 export const Jar = () => {
   const { state, dispatch } = useFruitContext();
-  const [showBreakdown, setShowBreakdown] = useState(false);
-  const [isListCollapsed, setIsListCollapsed] = useState(false);
+  const [isNutritionExpanded, setIsNutritionExpanded] = useState(false);
 
-  const handleRemoveFruit = (fruit: Fruit) => {
-    dispatch({ type: "REMOVE_FRUIT", payload: fruit });
+  const toggleNutritionExpand = () => {
+    setIsNutritionExpanded(!isNutritionExpanded);
   };
 
   const handleRemoveAll = () => {
     dispatch({ type: "REMOVE_ALL_FRUITS" });
   };
 
-  const toggleBreakdown = () => {
-    setShowBreakdown(!showBreakdown);
+  const handleRemoveFruit = (fruit: Fruit) => {
+    dispatch({ type: "REMOVE_FRUIT", payload: fruit });
   };
 
-  const toggleListCollapse = () => {
-    setIsListCollapsed(!isListCollapsed);
+  const handleIncreaseQuantity = (fruit: Fruit) => {
+    dispatch({ type: "INCREASE_QUANTITY", payload: fruit });
+  };
+
+  const handleDecreaseQuantity = (fruit: Fruit) => {
+    dispatch({ type: "DECREASE_QUANTITY", payload: fruit });
   };
 
   const getNutritionTotals = () => {
@@ -48,70 +51,79 @@ export const Jar = () => {
 
   return (
     <motion.div
-      className="md:p-4 p-2 mt-4 border border-gray-300 rounded w-full"
+      className="p-4 border border-gray-300 rounded w-full"
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="font-bold text-lg mb-4">Your Jar</h2>
-
-      <div className="flex mb-4 md:justify-between justify-start ">
-        <button
-          onClick={toggleBreakdown}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          {showBreakdown ? "Hide Breakdown" : "Show Breakdown"}
-        </button>
-        <button
-          onClick={handleRemoveAll}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Remove All
-        </button>
-        <button
-          onClick={toggleListCollapse}
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-        >
-          {isListCollapsed ? "Expand List" : "Collapse List"}
-        </button>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="font-bold text-lg">Your Jar</h2>
+        <div className="flex space-x-2">
+          <button
+            onClick={toggleNutritionExpand}
+            className="bg-primaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
+          >
+            {isNutritionExpanded ? "Hide Breakdown" : "Show Breakdown"}
+          </button>
+          <button
+            onClick={handleRemoveAll}
+            className="bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded"
+          >
+            Remove All
+          </button>
+        </div>
       </div>
-      {!isListCollapsed && (
-        <ul>
-          {state.selectedFruits.map((item, index) => (
-            <motion.li
-              key={index}
-              className="flex justify-between mb-2"
-              whileHover={{ scale: 1.05 }}
-            >
-              {item.fruit.name} ({item.fruit.nutritions.calories} calories) x{" "}
-              {item.quantity}
+
+      {isNutritionExpanded && (
+        <div className="mb-4 p-4 bg-gray-700 text-white rounded">
+          <h3 className="font-bold text-md">Nutritional Breakdown</h3>
+          <ul className="mt-2">
+            <li>Calories: {totals.calories}</li>
+            <li>Fat: {totals.fat.toFixed(2)}g</li>
+            <li>Sugar: {totals.sugar.toFixed(2)}g</li>
+            <li>Carbohydrates: {totals.carbohydrates.toFixed(2)}g</li>
+            <li>Protein: {totals.protein.toFixed(2)}g</li>
+          </ul>
+        </div>
+      )}
+
+      <ul className="bg-gray-800 p-4 rounded">
+        {state.selectedFruits.map(({ fruit, quantity }, index) => (
+          <motion.li
+            key={index}
+            className="flex justify-between mb-2 text-white"
+            whileHover={{ scale: 1.05 }}
+          >
+            <div>
+              {fruit.name} ({fruit.nutritions.calories} calories) x {quantity}
+            </div>
+            <div className="flex items-center">
               <button
-                onClick={() => handleRemoveFruit(item.fruit)}
-                className="ml-4 bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded"
+                onClick={() => handleDecreaseQuantity(fruit)}
+                className="bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded mr-2"
+              >
+                -
+              </button>
+              <button
+                onClick={() => handleIncreaseQuantity(fruit)}
+                className="bg-green-500 hover:bg-green-700 text-white px-2 py-1 rounded"
+              >
+                +
+              </button>
+              <button
+                onClick={() => handleRemoveFruit(fruit)}
+                className="ml-4 bg-primaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
               >
                 Remove
               </button>
-            </motion.li>
-          ))}
-        </ul>
-      )}
+            </div>
+          </motion.li>
+        ))}
+      </ul>
 
-      <div className="mt-4 font-bold">Total Calories: {totals.calories}</div>
-
-      {showBreakdown && (
-        <motion.div
-          className="mt-4 p-4 border border-gray-300 rounded bg-gray-700 text-white"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          transition={{ duration: 0.5 }}
-        >
-          <h3 className="text-lg font-bold mb-2">Nutrition Breakdown</h3>
-          <p>Fat: {totals.fat.toFixed(2)}g</p>
-          <p>Sugar: {totals.sugar.toFixed(2)}g</p>
-          <p>Carbohydrates: {totals.carbohydrates.toFixed(2)}g</p>
-          <p>Protein: {totals.protein.toFixed(2)}g</p>
-        </motion.div>
-      )}
+      <div className="mt-4 font-bold text-white">
+        Total Calories: {totals.calories}
+      </div>
     </motion.div>
   );
 };

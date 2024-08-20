@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const App = () => {
   return (
     <FruitProvider>
-      <div className="bg-white p-4 ">
+      <div className="bg-white p-4">
         <div className="bg-darkBg border-r-4 rounded-lg text-primaryText min-h-screen flex flex-col items-center p-8">
           <motion.header
             className="mb-8 text-center"
@@ -21,12 +21,12 @@ const App = () => {
             </p>
           </motion.header>
           <motion.main
-            className="flex flex-col-reverse place-items-start  lg:flex-row w-full max-w-5xl  md:mx-auto"
+            className="flex flex-col-reverse place-items-start lg:flex-row w-full max-w-5xl md:mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <div className="md:w-1/2 pr-4">
+            <div className="md:w-1/2">
               <FruitList />
             </div>
             <div className="md:w-1/2 w-full md:pl-4">
