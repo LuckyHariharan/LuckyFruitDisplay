@@ -15,13 +15,19 @@ export interface Fruit {
 }
 
 interface State {
-  selectedFruits: Fruit[];
+  selectedFruits: { fruit: Fruit; quantity: number }[];
   totalCalories: number;
 }
 
 interface Action {
-  type: "ADD_FRUIT" | "REMOVE_FRUIT";
-  payload: Fruit;
+  type:
+    | "ADD_FRUIT"
+    | "REMOVE_FRUIT"
+    | "REMOVE_ALL_FRUITS"
+    | "INCREASE_QUANTITY"
+    | "DECREASE_QUANTITY"
+    | "ADD_ALL_FRUITS";
+  payload?: Fruit | Fruit[];
 }
 
 const initialState: State = {
@@ -32,24 +38,128 @@ const initialState: State = {
 const FruitContext = createContext<
   { state: State; dispatch: React.Dispatch<Action> } | undefined
 >(undefined);
-// add all, and group by for fruit reducer
+
 export const fruitReducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case "ADD_FRUIT":
-      return {
-        ...state,
-        selectedFruits: [...state.selectedFruits, action.payload],
-        totalCalories: state.totalCalories + action.payload.nutritions.calories,
-      };
-    case "REMOVE_FRUIT":
-      const filteredFruits = state.selectedFruits.filter(
-        (fruit) => fruit.name !== action.payload.name
+    case "ADD_FRUIT": {
+      const fruit = action.payload as Fruit;
+      const existingFruit = state.selectedFruits.find(
+        (item) => item.fruit.name === fruit.name
       );
+      if (existingFruit) {
+        return {
+          ...state,
+          selectedFruits: state.selectedFruits.map((item) =>
+            item.fruit.name === fruit.name
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          ),
+          totalCalories: state.totalCalories + fruit.nutritions.calories,
+        };
+      } else {
+        return {
+          ...state,
+          selectedFruits: [...state.selectedFruits, { fruit, quantity: 1 }],
+          totalCalories: state.totalCalories + fruit.nutritions.calories,
+        };
+      }
+    }
+    case "REMOVE_FRUIT": {
+      const fruit = action.payload as Fruit;
+      const existingFruit = state.selectedFruits.find(
+        (item) => item.fruit.name === fruit.name
+      );
+      if (existingFruit && existingFruit.quantity > 1) {
+        return {
+          ...state,
+          selectedFruits: state.selectedFruits.map((item) =>
+            item.fruit.name === fruit.name
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          ),
+          totalCalories: state.totalCalories - fruit.nutritions.calories,
+        };
+      } else {
+        return {
+          ...state,
+          selectedFruits: state.selectedFruits.filter(
+            (item) => item.fruit.name !== fruit.name
+          ),
+          totalCalories: state.totalCalories - fruit.nutritions.calories,
+        };
+      }
+    }
+    case "REMOVE_ALL_FRUITS": {
       return {
         ...state,
-        selectedFruits: filteredFruits,
-        totalCalories: state.totalCalories - action.payload.nutritions.calories,
+        selectedFruits: [],
+        totalCalories: 0,
       };
+    }
+    case "INCREASE_QUANTITY": {
+      const fruit = action.payload as Fruit;
+      return {
+        ...state,
+        selectedFruits: state.selectedFruits.map((item) =>
+          item.fruit.name === fruit.name
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        ),
+        totalCalories: state.totalCalories + fruit.nutritions.calories,
+      };
+    }
+    case "DECREASE_QUANTITY": {
+      const fruit = action.payload as Fruit;
+      const existingFruit = state.selectedFruits.find(
+        (item) => item.fruit.name === fruit.name
+      );
+      if (existingFruit && existingFruit.quantity > 1) {
+        return {
+          ...state,
+          selectedFruits: state.selectedFruits.map((item) =>
+            item.fruit.name === fruit.name
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          ),
+          totalCalories: state.totalCalories - fruit.nutritions.calories,
+        };
+      } else {
+        return {
+          ...state,
+          selectedFruits: state.selectedFruits.filter(
+            (item) => item.fruit.name !== fruit.name
+          ),
+          totalCalories: state.totalCalories - fruit.nutritions.calories,
+        };
+      }
+    }
+    case "ADD_ALL_FRUITS": {
+      const fruits = action.payload as Fruit[];
+      let updatedSelectedFruits = [...state.selectedFruits];
+      let additionalCalories = 0;
+
+      fruits.forEach((fruit) => {
+        const existingFruit = updatedSelectedFruits.find(
+          (item) => item.fruit.name === fruit.name
+        );
+        if (existingFruit) {
+          updatedSelectedFruits = updatedSelectedFruits.map((item) =>
+            item.fruit.name === fruit.name
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          );
+        } else {
+          updatedSelectedFruits.push({ fruit, quantity: 1 });
+        }
+        additionalCalories += fruit.nutritions.calories;
+      });
+
+      return {
+        ...state,
+        selectedFruits: updatedSelectedFruits,
+        totalCalories: state.totalCalories + additionalCalories,
+      };
+    }
     default:
       return state;
   }
