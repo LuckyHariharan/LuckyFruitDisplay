@@ -32,8 +32,8 @@ const initialState: State = {
 const FruitContext = createContext<
   { state: State; dispatch: React.Dispatch<Action> } | undefined
 >(undefined);
-
-const fruitReducer = (state: State, action: Action): State => {
+// add all, and group by for fruit reducer
+export const fruitReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "ADD_FRUIT":
       return {
