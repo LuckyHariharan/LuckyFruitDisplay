@@ -3,6 +3,7 @@ import { fruitReducer, Fruit } from "../contexts/FruitContext";
 // Create fake fruit data
 const cucumber: Fruit = {
   name: "cucumber",
+  id: "22",
   family: "cucumberfamily",
   order: "cucumberorder",
   genus: "cucumbergenus",
@@ -17,6 +18,7 @@ const cucumber: Fruit = {
 
 const banana: Fruit = {
   name: "banana",
+  id: "21",
   family: "bananafamily",
   order: "bananaorder",
   genus: "bananagenus",

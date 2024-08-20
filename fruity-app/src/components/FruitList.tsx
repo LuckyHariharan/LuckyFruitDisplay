@@ -102,7 +102,7 @@ export const FruitList = () => {
             <ul>
               {fruits.map((fruit) => (
                 <motion.li
-                  key={fruit.name}
+                  key={fruit.id}
                   className="flex justify-between mb-2"
                   whileHover={{ scale: 1.05 }}
                 >

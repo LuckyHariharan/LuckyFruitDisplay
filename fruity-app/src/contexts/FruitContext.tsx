@@ -2,6 +2,7 @@ import React, { createContext, useContext, useReducer, ReactNode } from "react";
 
 export interface Fruit {
   name: string;
+  id: string;
   family: string;
   order: string;
   genus: string;
