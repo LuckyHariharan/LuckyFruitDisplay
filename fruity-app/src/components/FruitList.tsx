@@ -57,13 +57,13 @@ export const FruitList = () => {
       {Object.entries(groupedFruits).map(([group, fruits]) => (
         <motion.div
           key={group}
-          className="mb-4"
+          className="mb-4 bg-gray-800 p-2 border rounded-md"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
           {groupBy !== "None" && (
-            <div className="flex justify-between items-center">
+            <div className="flex pb-4 justify-between items-center">
               <h3 className="font-bold text-lg">{group}</h3>
               <button
                 onClick={() => handleAddGroup(fruits)}
@@ -96,6 +96,7 @@ export const FruitList = () => {
   );
 };
 
+// code is hard to understand
 const groupByFruits = (
   fruits: Fruit[],
   groupBy: "Family" | "Order" | "Genus"
