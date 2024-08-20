@@ -1,7 +1,10 @@
 import axios from "axios";
 
-// Base URL for the Fruityvice API
-const API_URL = "/api/fruit/all";
+// Set the API URL based on the environment
+const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://www.fruityvice.com/api/fruit/all"
+    : "/api/fruit/all";
 
 /**
  * Fetches the list of fruits from the Fruityvice API.

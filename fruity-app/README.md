@@ -1,10 +1,13 @@
-# Fruity Selector App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Overview
 
 The Fruity Selector App allows users to select fruits from a list, group them by various categories (Family, Order, Genus), and add them to a jar. The app calculates the total calories for the selected fruits and provides a detailed nutritional breakdown.
+
+## Running the App
+
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Build the app using `npm run build`.
+4. Start the development server with `npm start`.
 
 ### Features
 

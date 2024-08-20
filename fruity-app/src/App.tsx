@@ -3,10 +3,12 @@ import { FruitProvider } from "./contexts/FruitContext";
 import { FruitList } from "./components/FruitList";
 import { Jar } from "./components/Jar";
 import { motion } from "framer-motion";
+import HeroOverlay from "./components/HeroOverlay";
 
 const App = () => {
   return (
     <FruitProvider>
+      <HeroOverlay /> {/* Place the HeroOverlay component at the top */}
       <div className="bg-white p-4">
         <div className="bg-darkBg border-r-4 rounded-lg text-primaryText min-h-screen flex flex-col items-center p-8">
           <motion.header
@@ -38,11 +40,7 @@ const App = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-          >
-            <button className="bg-primaryButton hover:bg-buttonHover text-white font-bold py-2 px-4 rounded">
-              Get Started
-            </button>
-          </motion.footer>
+          ></motion.footer>
         </div>
       </div>
     </FruitProvider>
