@@ -107,7 +107,7 @@ test("remove all fruits from our list and reset the calories", () => {
       { fruit: cucumber, quantity: 1 },
       { fruit: banana, quantity: 1 },
     ],
-    totalCalories: 23,
+    totalCalories: 2,
   };
   const newState = fruitReducer(initialState, { type: "REMOVE_ALL_FRUITS" });
   expect(newState.selectedFruits.length).toBe(0);
