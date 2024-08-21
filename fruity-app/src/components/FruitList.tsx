@@ -72,15 +72,14 @@ export const FruitList = () => {
     groupBy !== "None" ? groupByFruits(fruits, groupBy) : { None: fruits };
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="flex flex-col w-full p-2 h-full">
       {loading ? (
-        // Display loading state
+        // Display loading state while we fetch the data
         <div className="flex justify-center items-center h-full">
           <p className="text-white">Loading fruits...</p>
         </div>
       ) : (
         <>
-          {/* Dropdown to select grouping criteria */}
           <select
             id="group-by"
             value={groupBy}
@@ -93,7 +92,7 @@ export const FruitList = () => {
             <option value="Genus">Genus</option>
           </select>
 
-          <div className="overflow-y-auto max-h-96">
+          <div className="">
             {Object.entries(groupedFruits).map(([group, fruits]) => (
               <motion.div
                 key={group}
@@ -126,28 +125,29 @@ export const FruitList = () => {
                     </button>
                   </motion.li>
                 </div>
-                {!collapsedGroups[group] && fruits && (
-                  <ul>
-                    {fruits.map((fruit) => (
-                      <motion.li
-                        key={fruit.id}
-                        className="flex justify-between mb-2"
-                        whileHover={{ scale: 1.02 }}
-                      >
-                        <div>
-                          {fruit.name} ({fruit.nutritions.calories} calories)
-                        </div>
-                        {/* Button to add individual fruit */}
-                        <button
-                          onClick={() => handleAddFruit(fruit)}
-                          className="ml-4 bg-primaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
+                <div className="overflow-y-auto max-h-96">
+                  {!collapsedGroups[group] && fruits && (
+                    <ul>
+                      {fruits.map((fruit) => (
+                        <motion.li
+                          key={fruit.id}
+                          className="flex justify-between mx-2 mb-2"
+                          whileHover={{ scale: 1.02 }}
                         >
-                          Add
-                        </button>
-                      </motion.li>
-                    ))}
-                  </ul>
-                )}
+                          <div>
+                            {fruit.name} ({fruit.nutritions.calories} calories)
+                          </div>
+                          <button
+                            onClick={() => handleAddFruit(fruit)}
+                            className=" bg-primaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
+                          >
+                            Add
+                          </button>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  )}{" "}
+                </div>
               </motion.div>
             ))}
           </div>
