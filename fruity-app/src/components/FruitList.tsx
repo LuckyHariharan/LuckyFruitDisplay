@@ -92,7 +92,7 @@ export const FruitList = () => {
             <option value="Genus">Genus</option>
           </select>
 
-          <div className="">
+          <div className="overflow-y-auto max-h-100">
             {Object.entries(groupedFruits).map(([group, fruits]) => (
               <motion.div
                 key={group}
