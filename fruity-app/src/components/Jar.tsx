@@ -81,27 +81,42 @@ export const Jar = () => {
         <>
           <div className="flex justify-around items-center mb-4">
             <div className="flex space-x-2">
-              <button
-                onClick={toggleFruitListCollapse}
-                className="bg-primaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
+              <motion.li
+                className="flex justify-between mb-2 text-white"
+                whileHover={{ scale: 1.02 }}
               >
-                {isFruitListCollapsed ? "Expand" : "Collapse"}{" "}
-                <FontAwesomeIcon
-                  icon={isFruitListCollapsed ? faChevronDown : faChevronUp}
-                />
-              </button>
-              <button
-                onClick={toggleNutritionExpand}
-                className="bg-primaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
+                <button
+                  onClick={toggleFruitListCollapse}
+                  className="bg-primaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
+                >
+                  {isFruitListCollapsed ? "Expand" : "Collapse"}{" "}
+                  <FontAwesomeIcon
+                    icon={isFruitListCollapsed ? faChevronDown : faChevronUp}
+                  />
+                </button>
+              </motion.li>
+              <motion.li
+                className="flex justify-between mb-2 text-white"
+                whileHover={{ scale: 1.02 }}
               >
-                {isNutritionExpanded ? "Hide Breakdown" : "Show Breakdown"}
-              </button>
-              <button
-                onClick={handleRemoveAll}
-                className="bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded"
+                <button
+                  onClick={toggleNutritionExpand}
+                  className="bg-primaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
+                >
+                  {isNutritionExpanded ? "Hide Breakdown" : "Show Breakdown"}
+                </button>
+              </motion.li>
+              <motion.li
+                className="flex justify-between mb-2 text-white"
+                whileHover={{ scale: 1.02 }}
               >
-                Remove All
-              </button>
+                <button
+                  onClick={handleRemoveAll}
+                  className="bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded"
+                >
+                  Remove All
+                </button>
+              </motion.li>
             </div>
           </div>
           <div className="m-4 font-bold text-white">
@@ -134,7 +149,7 @@ export const Jar = () => {
                       {fruit.name} ({fruit.nutritions.calories} calories) x{" "}
                       {quantity}
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex ">
                       <button
                         onClick={() => handleDecreaseQuantity(fruit)}
                         className="bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded mr-2"
@@ -149,9 +164,9 @@ export const Jar = () => {
                       </button>
                       <button
                         onClick={() => handleRemoveFruit(fruit)}
-                        className="ml-4 bg-primaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
+                        className="md:ml-4 bg-secondaryButton hover:bg-buttonHover text-white px-2 py-1 rounded"
                       >
-                        Remove
+                        Trash
                       </button>
                     </div>
                   </motion.li>
