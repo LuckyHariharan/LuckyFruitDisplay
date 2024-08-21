@@ -22,7 +22,7 @@ The Fruity Selector App allows users to select fruits from a list, group them by
 
 ### Context API
 
-The app uses the Context API to manage the state of selected fruits and their total nutritional values. This approach was chosen for its simplicity and suitability for this use case, where global state management is needed across multiple components.
+The app uses the Context API to manage the state of selected fruits and their total nutritional values. This approach was chosen for its simplicity -- especially for this use case, where global state management is needed across multiple components.
 
 #### Benefits of Context API:
 

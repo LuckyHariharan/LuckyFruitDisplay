@@ -8,8 +8,8 @@ import HeroOverlay from "./components/HeroOverlay";
 const App = () => {
   return (
     <FruitProvider>
-      <HeroOverlay /> {/* Place the HeroOverlay component at the top */}
-      <div className="bg-white p-4">
+      <HeroOverlay />
+      <div className="bg-white p-4 h-screen">
         <div className="bg-darkBg border-r-4 rounded-lg text-primaryText min-h-screen flex flex-col items-center p-8">
           <motion.header
             className="mb-8 text-center"
@@ -23,15 +23,15 @@ const App = () => {
             </p>
           </motion.header>
           <motion.main
-            className="flex flex-col-reverse place-items-start lg:flex-row w-full max-w-5xl md:mx-auto"
+            className="flex flex-col-reverse lg:space-x-8 place-items-start lg:flex-row w-full max-w-5xl md:mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <div className="md:w-1/2">
+            <div className="lg:w-1/2 w-full">
               <FruitList />
             </div>
-            <div className="md:w-1/2 w-full md:pl-4">
+            <div className="lg:w-1/2 w-full ">
               <Jar />
             </div>
           </motion.main>

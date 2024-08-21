@@ -35,7 +35,7 @@ const HeroOverlay = () => {
           Welcome to Fruit Selector
         </h1>
         <p className="text-xl md:text-2xl text-gray-300 mt-4">
-          Scroll down to explore
+          Move your mouse/scroll to get started
         </p>
       </div>
     </motion.div>
