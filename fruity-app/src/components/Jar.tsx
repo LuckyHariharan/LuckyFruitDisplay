@@ -79,7 +79,7 @@ export const Jar = () => {
         </div>
       ) : (
         <>
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-around items-center mb-4">
             <div className="flex space-x-2">
               <button
                 onClick={toggleFruitListCollapse}
