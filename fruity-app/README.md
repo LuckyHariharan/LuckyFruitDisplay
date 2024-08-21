@@ -5,9 +5,10 @@ The Fruity Selector App allows users to select fruits from a list, group them by
 ## Running the App
 
 1. Clone the repository.
-2. Install dependencies using `npm install`.
-3. Build the app using `npm run build`.
-4. Start the development server with `npm start`.
+2. Navigate to the fruity-app using 'cd fruity-app'
+3. Install dependencies using `npm install`.
+4. Build the app using `npm run build`.
+5. Start the development server with `npm start`.
 
 ### Features
 
