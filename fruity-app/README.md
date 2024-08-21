@@ -45,4 +45,8 @@ Unit tests were written using Jest and React Testing Library to ensure code qual
 The reducer was tested thoroughly to validate its handling of key operations such as adding, removing, and updating the quantity of fruits in the jar.
 To run the tests, use the command:
 
-`npm test`.
+`npm run test`
+`a` -- to run all tests
+
+Thank you for the opportunity to work on this project! I had a blast and look forward to hearing your feedback!
+Lucky Hariharan
